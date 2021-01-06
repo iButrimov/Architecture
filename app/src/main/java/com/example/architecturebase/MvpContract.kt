@@ -1,4 +1,13 @@
 package com.example.architecturebase
 
-interface mvpContract {
+interface MvpContract {
+
+    interface IView {
+
+    }
+
+    interface IPresenter {
+        fun getPosts()
+    }
+
 }
