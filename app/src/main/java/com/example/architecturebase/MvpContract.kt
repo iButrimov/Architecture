@@ -7,7 +7,7 @@ interface MvpContract {
     }
 
     interface IPresenter {
-        fun getPosts()
+        fun getPost()
     }
 
 }
