@@ -1,13 +1,15 @@
-package com.example.architecturebase
+package com.example.architecturebase.data
 
-import com.example.architecturebase.network.IPostApi
+import com.example.architecturebase.domain.entities.Post
+import com.example.architecturebase.domain.repository.IRepository
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
+import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
-class RemoteRepository {
+class RemoteRepository : IRepository {
 
     companion object {
         private const val REQUEST_TIMEOUT_SECONDS = 5L
@@ -26,5 +28,9 @@ class RemoteRepository {
             .client(okHttpClient)
             .build()
 
-    val postApi: IPostApi = retrofit.create(IPostApi::class.java)
+    private val postApi: IPostApi = retrofit.create(IPostApi::class.java)
+
+    override fun loadPosts(): Call<List<Post>> {
+        return postApi.getPosts()
+    }
 }
